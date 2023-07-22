@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 import { FollowingList } from './FollowingList';
 
 export const ProfileSidebar = ({ userId }) => {
-    const baseUrl = "http://localhost:3001";
+    // const baseUrl = "http://localhost:3001";
+    const baseUrl = "netspire-api.vercel.app";
 
     const [user, setUser] = useState(null);
     const token = useSelector((state) => state.token);

@@ -7,7 +7,8 @@ import { setLogin } from '../features/authReducer';
 import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
-    const baseUrl = "http://localhost:3001";
+    // const baseUrl = "http://localhost:3001";
+    const baseUrl = "netspire-api.vercel.app";
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')

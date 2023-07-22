@@ -6,7 +6,8 @@ import { Avatar } from "../Avatar";
 import { Link, useNavigate } from "react-router-dom";
 
 export const FollowingList = ({ userId }) => {
-    const baseUrl = "http://localhost:3001";
+    // const baseUrl = "http://localhost:3001";
+    const baseUrl = "netspire-api.vercel.app";
 
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);

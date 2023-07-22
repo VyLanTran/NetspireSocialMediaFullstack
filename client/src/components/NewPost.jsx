@@ -10,7 +10,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 export const NewPost = () => {
-    const baseUrl = "http://localhost:3001";
+    // const baseUrl = "http://localhost:3001";
+    const baseUrl = "netspire-api.vercel.app";
 
     const user = useSelector((state) => state.user);
     const [isImage, setIsImage] = useState(false);

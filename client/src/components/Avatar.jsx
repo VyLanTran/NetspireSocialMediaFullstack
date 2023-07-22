@@ -1,7 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
 export const Avatar = ({ image, size, shape = "circle", name, onClick }) => {
-    const baseUrl = "http://localhost:3001";
+    // const baseUrl = "http://localhost:3001";
+    const baseUrl = "netspire-api.vercel.app";
 
     return shape === "circle" ?
         (<Box width={size} height={size}>
