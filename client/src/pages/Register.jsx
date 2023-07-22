@@ -125,7 +125,7 @@ export const Register = () => {
                     </Grid>
 
                     {/* UPLOAD IMAGE */}
-                    <Grid item xs={12} sx={{ marginBottom: 4 }}>
+                    <Grid item xs={12} >
                         <Box>
                             <Dropzone
                                 acceptedFiles=".jpg,.jpeg,.png"
@@ -171,6 +171,31 @@ export const Register = () => {
                             </Dropzone>
                         </Box>
                     </Grid>
+
+                    <Grid
+                        item xs={12}
+                        sx={{ marginBottom: 4 }} >
+                        <Typography
+                            sx={{ fontSize: "14px" }}>
+                            Already have an account?
+                            <Typography
+                                component="span"
+                                sx={{
+                                    fontSize: "14px",
+                                    fontWeight: "bold",
+                                    cursor: "pointer",
+                                    color: "#008ad3",
+                                }}
+                                onClick={() => {
+                                    navigate('/');
+                                    navigate(0);
+                                }}
+                            >
+                                {" "}Log in
+                            </Typography>
+                        </Typography>
+                    </Grid>
+
 
                     {/* REGISTER BUTTON */}
                     <Grid item xs={12} sx={{ textAlign: 'center' }}>

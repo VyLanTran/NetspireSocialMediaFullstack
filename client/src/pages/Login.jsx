@@ -67,7 +67,7 @@ export const Login = () => {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </Grid>
-                    <Grid item xs={12} sx={{ marginBottom: 4 }} >
+                    <Grid item xs={12}  >
                         <TextField
                             name="password"
                             label="Password"
@@ -77,6 +77,30 @@ export const Login = () => {
                             required
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                    </Grid>
+
+                    <Grid
+                        item xs={12}
+                        sx={{ marginBottom: 4 }} >
+                        <Typography
+                            sx={{ fontSize: "14px" }}>
+                            Don't have an account?
+                            <Typography
+                                component="span"
+                                sx={{
+                                    fontSize: "14px",
+                                    fontWeight: "bold",
+                                    cursor: "pointer",
+                                    color: "#008ad3",
+                                }}
+                                onClick={() => {
+                                    navigate('/register');
+                                    navigate(0);
+                                }}
+                            >
+                                {" "}Sign up
+                            </Typography>
+                        </Typography>
                     </Grid>
 
                     {/* LOGIN BUTTON */}
