@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { Box, Card, Divider, IconButton, InputBase, Typography, } from '@mui/material'
+import { Box, Card, IconButton, InputBase, Typography, } from '@mui/material'
 import { Avatar as UserAvatar } from './Avatar'
 import { useDispatch, useSelector } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import { DeleteOutlined, EditOutlined, ImageOutlined, SendOutlined } from '@mui/icons-material';
 import styled from '@emotion/styled';
 import { setPosts } from '../features/authReducer';
+import { useNavigate } from 'react-router-dom';
 
 
 export const NewPost = () => {
@@ -13,21 +14,22 @@ export const NewPost = () => {
     const user = useSelector((state) => state.user);
     const [isImage, setIsImage] = useState(false);
     const [image, setImage] = useState(null);
-    const [post, setPost] = useState('');
+    const [desc, setDesc] = useState('');
     const dispatch = useDispatch();
     const userId = useSelector((state) => state.user._id);
     const token = useSelector((state) => state.token);
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
         const formData = new FormData();
         formData.append("userId", userId);
-        formData.append("description", post);
+        formData.append("description", desc);
+        formData.append("location", user.location);
         if (image) {
-            formData.append("picture", image);
-            formData.append("picturePath", image.name);
+            formData.append("picture", image.name);
         }
 
-        const response = await fetch(`http://localhost:3001/posts`, {
+        const response = await fetch("http://localhost:3001/posts", {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
             body: formData,
@@ -37,7 +39,8 @@ export const NewPost = () => {
 
         // reset data
         setImage(null);
-        setPost("");
+        setDesc("");
+        setIsImage(false);
     };
 
 
@@ -48,25 +51,38 @@ export const NewPost = () => {
                 <UserAvatar
                     image={user.avatar}
                     size="55px"
+                    onClick={() => {
+                        navigate(`/profile/${userId}`);
+                        navigate(0);
+                    }}
                 />
-                <SearchBar>
-                    <InputBase
-                        placeholder={`What's on your mind, ${user.firstName}`}
-                        onChange={(e) => setPost(e.target.value)}
-                        value={post}
-                        sx={{
-                            width: "100%"
-                        }}
-                    />
-                    <IconButton
-                        disabled={!post}
-                        onClick={handleSubmit}>
-                        <SendOutlined />
-                    </IconButton>
-                </SearchBar>
+                <Box
+                    sx={{ width: "100%", }}
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    gap="1rem"
+                >
+                    <SearchBar>
+                        <InputBase
+                            placeholder={`What's on your mind, ${user.firstName}`}
+                            onChange={(e) => setDesc(e.target.value)}
+                            value={desc}
+                            sx={{
+                                width: "100%"
+                            }}
+                        />
+                        <IconButton
+                            disabled={!desc}
+                            onClick={handleSubmit}>
+                            <SendOutlined />
+                        </IconButton>
+                    </SearchBar>
 
-                <Box gap="0.25rem" onClick={() => setIsImage(!isImage)}>
-                    <ImageOutlined sx={{ fontSize: "26px", "&:hover": { cursor: "pointer", } }} />
+                    <Box
+                        onClick={() => setIsImage(!isImage)}>
+                        <ImageOutlined sx={{ fontSize: "36px", fontWeight: "light", "&:hover": { cursor: "pointer", } }} />
+                    </Box>
                 </Box>
             </Box>
 
@@ -80,10 +96,11 @@ export const NewPost = () => {
                         {({ getRootProps, getInputProps }) => (
                             <Box display="flex"
                                 justifyContent="space-between"
-                                sx={{ width: "100%" }}>
+                                sx={{ width: "100%" }}
+                                gap={1}>
                                 <Box
                                     {...getRootProps()}
-                                    border={`1px solid `}
+                                    border={`1px solid rgba(255, 0, 0, 0.5)`}
                                     borderRadius="5px"
                                     p="1rem"
                                     width="100%"
@@ -93,7 +110,8 @@ export const NewPost = () => {
                                     <Box
                                         display="flex"
                                         height="100%"
-                                        alignItems="center"    >
+                                        alignItems="center"
+                                        borderColor="rgba(255, 0, 0, 0.5)"  >
                                         {!image ?
                                             (
                                                 <Typography sx={{ fontSize: "14px", color: "rgba(255, 0, 0, 0.5)" }}>Upload Image</Typography>
@@ -104,14 +122,15 @@ export const NewPost = () => {
                                                     justifyContent="space-between"
                                                     sx={{ width: "100%" }} >
                                                     <Typography sx={{ fontSize: "14px", color: "rgba(255, 0, 0, 0.5)" }}>{image.name}</Typography>
-                                                    <EditOutlined />
+                                                    <EditOutlined sx={{ color: "rgba(255, 0, 0, 0.5)" }} />
                                                 </Box>
                                             )}
                                     </Box>
                                 </Box>
                                 {image && (
                                     <IconButton
-                                        onClick={() => setImage(null)}   >
+                                        onClick={() => setImage(null)}
+                                        sx={{ color: "rgba(255, 0, 0, 0.5)" }}   >
                                         <DeleteOutlined />
                                     </IconButton>
                                 )}

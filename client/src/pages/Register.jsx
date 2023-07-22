@@ -12,7 +12,7 @@ export const Register = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [avatar, setAvatar] = useState('')
+    const [avatar, setAvatar] = useState(null)
     const [errorMessage, setErrorMessage] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -24,7 +24,12 @@ export const Register = () => {
         formData.append("lastName", lastName);
         formData.append("email", email);
         formData.append("password", password);
-        formData.append("picturePath", avatar.name);
+        if (avatar) {
+            formData.append("avatar", avatar.name);
+        }
+        else {
+            formData.append("avatar", 'unknownAvatar.jpeg');
+        }
 
         const savedUserResponse = await fetch(
             "http://localhost:3001/auth/register",
@@ -33,18 +38,24 @@ export const Register = () => {
                 body: formData,
             }
         );
-        const savedUser = await savedUserResponse.json();
 
         // log in
-        // if (savedUser) {
-        //     dispatch(
-        //         setLogin({
-        //             user: savedUser.user,
-        //             token: savedUser.token,
-        //         })
-        //     );
-        //     navigate("/home");
-        // }
+        const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+        });
+        const loggedIn = await loggedInResponse.json();
+
+        if (loggedIn) {
+            dispatch(
+                setLogin({
+                    user: loggedIn.user,
+                    token: loggedIn.token,
+                })
+            );
+            navigate("/home");
+        }
     };
 
     return (
@@ -142,7 +153,7 @@ export const Register = () => {
                                     >
                                         <input {...getInputProps()} />
                                         {!avatar ? (
-                                            <p>Upload Image</p>
+                                            <p>Upload Avatar</p>
                                         ) : (
                                             <Box
                                                 sx={{

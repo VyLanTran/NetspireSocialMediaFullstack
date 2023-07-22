@@ -17,6 +17,7 @@ export const Home = () => {
                     <Feed />
                 </Box>
                 <Rightbar />
+                {/* <FriendListWidget userId={_id} /> */}
             </Stack>
         </Box>
     )

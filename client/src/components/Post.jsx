@@ -1,43 +1,19 @@
 import React, { useState } from 'react'
-import { Favorite, FavoriteBorder, MoreVert, PersonAddOutlined, PersonRemoveOutlined, ChatBubbleOutline, NearMeOutlined, BookmarkBorderOutlined, BookmarkOutlined } from '@mui/icons-material'
-import { Box, Card, CardActions, CardContent, CardHeader, CardMedia, Checkbox, Divider, IconButton, Typography } from '@mui/material'
-import { Avatar as UserAvatar } from './Avatar'
-import { useNavigate } from "react-router-dom";
+import { Favorite, FavoriteBorder, ChatBubbleOutline, BookmarkBorderOutlined, BookmarkOutlined } from '@mui/icons-material'
+import { Box, Card, CardActions, CardContent, CardMedia, Checkbox, Divider, IconButton, Typography } from '@mui/material'
 import IosShareIcon from '@mui/icons-material/IosShare';
 import { useDispatch, useSelector } from "react-redux";
-import { setFollowings } from '../features/authReducer';
-// import { updatePost } from "../features/postReducer.js";
 import { updatePost } from "../features/authReducer";
+import { PostHeader } from './PostHeader';
 
 export const Post = ({ postId, userId, name, avatar, picture, description, location, likes, comments }) => {
 
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const authId = useSelector((state) => state.user._id);
+    const currentUserId = useSelector((state) => state.user._id);
     const token = useSelector((state) => state.token);
-    const followings = useSelector((state) => state.user.followings);
-
-    // const followed = followings.includes(userId);
-    const followed = false;
     const [openComments, setOpenComments] = useState(false);
-    const liked = Boolean(likes[authId]);
-
-
-    const addRemoveFollowing = async () => {
-        const response = await fetch(
-            `http://localhost:3001/users/${authId}/${userId}`,
-            {
-                method: "PATCH",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-            }
-        );
-        const data = await response.json();
-        dispatch(setFollowings({ folloings: data }));
-    };
+    const isLiked = Boolean(likes[currentUserId]);
 
     const addRemoveLike = async () => {
         const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -46,7 +22,7 @@ export const Post = ({ postId, userId, name, avatar, picture, description, locat
                 Authorization: `Bearer ${token}`,
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({ userId: authId }),
+            body: JSON.stringify({ userId: currentUserId }),
         });
         const data = await response.json();
         dispatch(updatePost({ post: data }));
@@ -54,43 +30,12 @@ export const Post = ({ postId, userId, name, avatar, picture, description, locat
 
     return (
         <Card sx={{ margin: 5, boxShadow: "0 2px 8px rgba(0, 0, 0, 0.15)" }}>
-            <CardHeader
-                avatar={
-                    <UserAvatar
-                        image={avatar} size="55px"
-                        onClick={() => {
-                            navigate(`/profile/${userId}`);
-                            navigate(0);
-                        }} />
-                }
-                action={
-                    <Box>
-                        < IconButton
-                            onClick={() => addRemoveFollowing()}
-                            sx={{ p: "0.6rem" }} >
-                            {followed ? (
-                                <PersonRemoveOutlined />
-                            ) : (
-                                <PersonAddOutlined />
-                            )}
-                        </IconButton>
-                        <IconButton aria-label="settings">
-                            <MoreVert />
-                        </IconButton>
-                    </Box>
-                }
-                title={
-                    < span
-                        onClick={() => {
-                            navigate(`/profile/${userId}`);
-                            navigate(0);
-                        }}
-                        style={{ cursor: "pointer" }}>
-                        {name}
-                    </span >
-                }
-                subheader={location}
-            />
+            <PostHeader
+                userId={userId}
+                name={name}
+                avatar={avatar}
+                location={location} />
+
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     {description}
@@ -110,8 +55,13 @@ export const Post = ({ postId, userId, name, avatar, picture, description, locat
                         <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <IconButton
                                 aria-label="favorite"
-                                onClick={() => addRemoveLike()}>
-                                {liked ? <Favorite sx={{ color: "red", fontSize: 26 }} /> : <FavoriteBorder sx={{ fontSize: 26 }} />}
+                                onClick={() => addRemoveLike()}
+                                sx={{
+                                    '&:hover': {
+                                        boxShadow: 'none', // Remove the shadow when hovering
+                                    },
+                                }}>
+                                {isLiked ? <Favorite sx={{ color: "red", fontSize: 26 }} /> : <FavoriteBorder sx={{ fontSize: 26 }} />}
                             </IconButton>
                             <Typography>{likes.size}</Typography>
                         </Box>
@@ -160,10 +110,10 @@ export const Post = ({ postId, userId, name, avatar, picture, description, locat
 const CommentBlock = ({ avatar, name, comment }) => {
     return (
         <Box sx={{ width: "100%" }}>
-            <Divider />
             <Typography sx={{ m: "0.5rem 0", pl: "1rem" }}>
                 {comment}
             </Typography>
+            <Divider />
         </Box>
 
     )

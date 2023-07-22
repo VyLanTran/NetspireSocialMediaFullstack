@@ -68,14 +68,6 @@ export const Sidebar = () => {
               <ListItemText primary="Profile" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <DarkModeIcon />
-              </ListItemIcon>
-              <Switch />
-            </ListItemButton>
-          </ListItem>
         </List>
       </Box>
     </Box>

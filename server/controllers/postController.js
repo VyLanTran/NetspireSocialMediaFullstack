@@ -1,14 +1,20 @@
 import PostModel from "../models/PostModel.js";
+import UserModel from "../models/UserModel.js";
 
 /** CREATE */
 export const createPost = async (req, res) => {
     try {
         const { userId, picture, description, location } = req.body;
+        // const { userId, description, picture } = req.body;
+        const user = await UserModel.findById(userId);
         const newPost = new PostModel({
             userId,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            avatar: user.avatar,
             picture,
             description,
-            location,
+            location: "",
             likes: {},
             comments: []
         })
@@ -24,7 +30,7 @@ export const createPost = async (req, res) => {
 /** READ */
 export const getAllPosts = async (req, res) => {
     try {
-        const posts = await PostModel.find();
+        const posts = await PostModel.find().sort({ updatedAt: -1 });;
         res.status(200).json(posts);
     } catch (err) {
         res.status(404).json({ message: err.message });

@@ -21,37 +21,42 @@ export const Feed = () => {
 
   useEffect(() => {
     getAllPosts();
-    // console.log(posts)
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Box>
       {
-        posts.map(
-          ({
-            _id,
-            userId,
-            firstName,
-            lastName,
-            avatar,
-            picture,
-            description,
-            location,
-            likes,
-            comments
-          }) => (
-            <Post
-              key={_id}
-              postId={_id}
-              userId={userId}
-              name={`${firstName} ${lastName}`}
-              avatar={avatar}
-              picture={picture}
-              description={description}
-              location={location}
-              likes={likes}
-              comments={comments} />
+        Array.isArray(posts) && posts.length > 0 ? (
+          posts.map(
+            ({
+              _id,
+              userId,
+              firstName,
+              lastName,
+              avatar,
+              picture,
+              description,
+              location,
+              likes,
+              comments
+            }) => (
+              <Post
+                key={_id}
+                postId={_id}
+                userId={userId}
+                name={`${firstName} ${lastName}`}
+                avatar={avatar}
+                // name="random name"
+                // avatar="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg-3382ZgdUhzsOz0VYE8KVNtX_HTwTxRSps08Nli1&s"
+                picture={picture}
+                description={description}
+                location={location}
+                likes={likes}
+                comments={comments} />
+            )
           )
+        ) : (
+          <p>Loading posts...</p>
         )
       }
     </Box >

@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     user: null,
     token: null,
-    posts: []
+    posts: [],
+    // followings: [],
+    // followers: []
 };
 
 export const authSlice = createSlice({
@@ -24,6 +26,12 @@ export const authSlice = createSlice({
                 state.user.followings = action.payload.followings;
             }
         },
+        setFollowers: (state, action) => {
+            // only allowed if authorized
+            if (state.user) {
+                state.user.followers = action.payload.followers;
+            }
+        },
         // updateFollowing
         // setFolloweres
         // updateFollower
@@ -41,7 +49,6 @@ export const authSlice = createSlice({
     }
 });
 
-// export const { setLogin, setLogout, setFollowings } = authSlice.actions;
-export const { setLogin, setLogout, setFollowings, setPosts, updatePost } = authSlice.actions;
+export const { setLogin, setLogout, setFollowings, setFollowers, setPosts, updatePost } = authSlice.actions;
 
 export default authSlice.reducer;

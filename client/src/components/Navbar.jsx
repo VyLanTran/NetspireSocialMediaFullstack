@@ -1,11 +1,13 @@
 import styled from '@emotion/styled'
-import { AppBar, Avatar, Badge, Box, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
+import { AppBar, Badge, Box, IconButton, InputBase, Menu, MenuItem, Toolbar, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import PetsIcon from '@mui/icons-material/Pets';
 import { Mail, Notifications, Search } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { setLogout } from "../features/authReducer";
+import { Avatar } from './Avatar'
+
 
 const StyledToolbar = styled(Toolbar)({
     backgroundColor: "white",
@@ -98,17 +100,18 @@ function Navbar() {
                     </Badge>
                     <Avatar
                         onClick={(e) => setOpen(true)}
-                        src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        // src={user.avatar}
-                        sx={{ width: 30, height: 30 }} />
+                        image={user.avatar}
+                        size="40px"
+                    />
                 </Icons>
 
                 {/* AVATAR ONLY - XS SCREEN */}
                 <UserAvatar onClick={(e) => setOpen(true)}>
                     <Avatar
-                        src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        // src={user.avatar}
-                        sx={{ width: 30, height: 30 }} />
+                        onClick={(e) => setOpen(true)}
+                        image={user.avatar}
+                        size="40px"
+                    />
                 </UserAvatar>
             </StyledToolbar>
 

@@ -6,11 +6,13 @@ import { UserPosts } from '../components/feed/UserPosts';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ProfileSidebar } from '../components/sidebar/ProfileSidebar';
+import { NewPost } from '../components/NewPost';
 
 export const Profile = () => {
 
     const [user, setUser] = useState(null);
     const { userId } = useParams();
+    const currentUserId = useSelector((state) => state.user._id);
     const token = useSelector((state) => state.token);
 
     const getUser = async () => {
@@ -31,8 +33,11 @@ export const Profile = () => {
             <Navbar />
             <Stack direction='row' spacing-={2} justifyContent='space-between' sx={{ marginTop: '100px' }}>
                 <ProfileSidebar userId={userId} />
-                <UserPosts userId={userId} />
-                {/* <Rightbar /> */}
+                <Box flex={4}>
+                    {userId === currentUserId && <NewPost />}
+                    <UserPosts userId={userId} />
+                </Box>
+                <Rightbar />
             </Stack>
         </Box>
     )

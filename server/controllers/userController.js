@@ -65,12 +65,13 @@ export const addRemoveFollowing = async (req, res) => {
         const followingList = await Promise.all(
             user.followings.map((followingId) => UserModel.findById(followingId))
         );
-        // const formattedFriends = friends.map(
-        //     ({ _id, firstName, lastName, occupation, location, picturePath }) => {
-        //         return { _id, firstName, lastName, occupation, location, picturePath };
-        //     }
-        // );
-        res.status(200).json(followingList);
+        const formattedFollowings = followingList.map(
+            ({ _id, firstName, lastName, avatar }) => {
+                return { _id, firstName, lastName, avatar };
+            }
+        );
+        // res.status(200).json(followingList);
+        res.status(200).json(formattedFollowings);
 
     } catch (err) {
         res.status(404).json({ message: err.message });
