@@ -6,6 +6,7 @@ import { setPosts } from '../../features/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const UserPosts = ({ userId }) => {
+    const baseUrl = "http://localhost:3001";
 
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
@@ -14,7 +15,7 @@ export const UserPosts = ({ userId }) => {
 
     const getUserPosts = async () => {
         const response = await fetch(
-            `http://localhost:3001/posts/${userId}`,
+            `${baseUrl}/posts/${userId}`,
             {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },

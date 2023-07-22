@@ -7,6 +7,7 @@ import { setLogin } from '../features/authReducer';
 import { useNavigate } from 'react-router-dom';
 
 export const Register = () => {
+    const baseUrl = "http://localhost:3001";
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
@@ -32,7 +33,7 @@ export const Register = () => {
         }
 
         const savedUserResponse = await fetch(
-            "http://localhost:3001/auth/register",
+            `${baseUrl}/auth/register`,
             {
                 method: "POST",
                 body: formData,
@@ -40,7 +41,7 @@ export const Register = () => {
         );
 
         // log in
-        const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+        const loggedInResponse = await fetch(`${baseUrl}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),

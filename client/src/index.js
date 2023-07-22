@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+// import dotenv from 'dotenv';
 import authReducer from "./features/authReducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
@@ -18,6 +19,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
 
+// dotenv.config();
 const persistConfig = { key: "root", storage, version: 1 };
 const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({

@@ -8,6 +8,8 @@ import { PostHeader } from './PostHeader';
 
 export const Post = ({ postId, userId, name, avatar, picture, description, location, likes, comments }) => {
 
+    const baseUrl = "http://localhost:3001";
+
     const dispatch = useDispatch();
 
     const currentUserId = useSelector((state) => state.user._id);
@@ -16,7 +18,7 @@ export const Post = ({ postId, userId, name, avatar, picture, description, locat
     const isLiked = Boolean(likes[currentUserId]);
 
     const addRemoveLike = async () => {
-        const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+        const response = await fetch(`${baseUrl}/posts/${postId}/like`, {
             method: "PATCH",
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -44,7 +46,7 @@ export const Post = ({ postId, userId, name, avatar, picture, description, locat
             {picture && <CardMedia
                 component="img"
                 height="20%"
-                image={`http://localhost:3001/assets/${picture}`}
+                image={`${baseUrl}/assets/${picture}`}
                 alt="image"
             />}
 

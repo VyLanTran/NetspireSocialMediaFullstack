@@ -6,6 +6,7 @@ import { Avatar } from "../Avatar";
 import { Link, useNavigate } from "react-router-dom";
 
 export const FollowingList = ({ userId }) => {
+    const baseUrl = "http://localhost:3001";
 
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
@@ -14,7 +15,7 @@ export const FollowingList = ({ userId }) => {
 
     const getFollowings = async () => {
         const response = await fetch(
-            `http://localhost:3001/users/${userId}/followings`,
+            `${baseUrl}/users/${userId}/followings`,
             {
                 method: "GET",
                 headers: { Authorization: `Bearer ${token}` },

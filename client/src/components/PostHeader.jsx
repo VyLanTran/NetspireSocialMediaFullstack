@@ -8,6 +8,8 @@ import { setFollowings } from '../features/authReducer';
 
 
 export const PostHeader = ({ userId, name, avatar, location }) => {
+    const baseUrl = "http://localhost:3001";
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { _id } = useSelector((state) => state.user);
@@ -17,7 +19,7 @@ export const PostHeader = ({ userId, name, avatar, location }) => {
 
     const addRemoveFollowing = async () => {
         const response = await fetch(
-            `http://localhost:3001/users/${_id}/${userId}`,
+            `${baseUrl}/users/${_id}/${userId}`,
             {
                 method: "PATCH",
                 headers: {

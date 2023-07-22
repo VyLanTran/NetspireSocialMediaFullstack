@@ -1,17 +1,17 @@
-import { Box, Divider, Grid, ImageList, ImageListItem, Typography } from '@mui/material'
+import { Box, Divider, Grid, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { Instagram, Twitter, LocationOn, WorkOutlined, School, Edit } from '@mui/icons-material';
-import { Avatar } from '../Avatar';
 import { useSelector } from 'react-redux';
 import { FollowingList } from './FollowingList';
 
 export const ProfileSidebar = ({ userId }) => {
+    const baseUrl = "http://localhost:3001";
 
     const [user, setUser] = useState(null);
     const token = useSelector((state) => state.token);
 
     const getUser = async () => {
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+        const response = await fetch(`${baseUrl}/users/${userId}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
         });

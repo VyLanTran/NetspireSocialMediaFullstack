@@ -9,6 +9,7 @@ import { ProfileSidebar } from '../components/sidebar/ProfileSidebar';
 import { NewPost } from '../components/NewPost';
 
 export const Profile = () => {
+    const baseUrl = "http://localhost:3001";
 
     const [user, setUser] = useState(null);
     const { userId } = useParams();
@@ -16,7 +17,7 @@ export const Profile = () => {
     const token = useSelector((state) => state.token);
 
     const getUser = async () => {
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
+        const response = await fetch(`${baseUrl}/users/${userId}`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
         });

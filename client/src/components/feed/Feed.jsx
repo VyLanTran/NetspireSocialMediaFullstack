@@ -5,13 +5,14 @@ import { setPosts } from '../../features/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const Feed = () => {
+  const baseUrl = "http://localhost:3001";
 
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const posts = useSelector((state) => state.posts);
 
   const getAllPosts = async () => {
-    const response = await fetch("http://localhost:3001/posts", {
+    const response = await fetch(`${baseUrl}/posts`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

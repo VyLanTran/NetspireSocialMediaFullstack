@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 export const NewPost = () => {
+    const baseUrl = "http://localhost:3001";
 
     const user = useSelector((state) => state.user);
     const [isImage, setIsImage] = useState(false);
@@ -29,7 +30,7 @@ export const NewPost = () => {
             formData.append("picture", image.name);
         }
 
-        const response = await fetch("http://localhost:3001/posts", {
+        const response = await fetch(`${baseUrl}/posts`, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
             body: formData,

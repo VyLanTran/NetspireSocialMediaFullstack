@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { setLogin } from "../features/authReducer";
 
 export const Login = () => {
+    const baseUrl = "http://localhost:3001";
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -15,7 +16,7 @@ export const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+        const loggedInResponse = await fetch(`${baseUrl}/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
