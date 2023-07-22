@@ -10,7 +10,7 @@ import { NewPost } from '../components/NewPost';
 
 export const Profile = () => {
     // const baseUrl = "http://localhost:3001";
-    const baseUrl = "netspire-api.vercel.app";
+    const baseUrl = "https://netspire-api.vercel.app";
 
     const [user, setUser] = useState(null);
     const { userId } = useParams();

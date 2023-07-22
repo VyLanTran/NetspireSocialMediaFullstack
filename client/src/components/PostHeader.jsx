@@ -9,7 +9,7 @@ import { setFollowings } from '../features/authReducer';
 
 export const PostHeader = ({ userId, name, avatar, location }) => {
     // const baseUrl = "http://localhost:3001";
-    const baseUrl = "netspire-api.vercel.app";
+    const baseUrl = "https://netspire-api.vercel.app";
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

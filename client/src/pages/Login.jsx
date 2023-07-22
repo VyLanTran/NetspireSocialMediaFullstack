@@ -6,7 +6,7 @@ import { setLogin } from "../features/authReducer";
 
 export const Login = () => {
     // const baseUrl = "http://localhost:3001";
-    const baseUrl = "netspire-api.vercel.app";
+    const baseUrl = "https://netspire-api.vercel.app";
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

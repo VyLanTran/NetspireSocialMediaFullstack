@@ -9,7 +9,7 @@ import { PostHeader } from './PostHeader';
 export const Post = ({ postId, userId, name, avatar, picture, description, location, likes, comments }) => {
 
     // const baseUrl = "http://localhost:3001";
-    const baseUrl = "netspire-api.vercel.app";
+    const baseUrl = "https://netspire-api.vercel.app";
 
     const dispatch = useDispatch();
 
