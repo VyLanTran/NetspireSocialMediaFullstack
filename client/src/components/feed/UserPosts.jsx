@@ -4,10 +4,10 @@ import { Box } from '@mui/material';
 // import { setPosts } from '../features/postReducer';
 import { setPosts } from '../../features/authReducer';
 import { useDispatch, useSelector } from 'react-redux';
+import { useBaseUrl } from '../../context/BaseUrlContext';
 
 export const UserPosts = ({ userId }) => {
-    // const baseUrl = "http://localhost:3001";
-    const baseUrl = "https://netspire-api.vercel.app";
+    const baseUrl = useBaseUrl();
 
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);

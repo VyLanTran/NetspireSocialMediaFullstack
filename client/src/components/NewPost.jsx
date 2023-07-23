@@ -7,11 +7,10 @@ import { DeleteOutlined, EditOutlined, ImageOutlined, SendOutlined } from '@mui/
 import styled from '@emotion/styled';
 import { setPosts } from '../features/authReducer';
 import { useNavigate } from 'react-router-dom';
-
+import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const NewPost = () => {
-    // const baseUrl = "http://localhost:3001";
-    const baseUrl = "https://netspire-api.vercel.app";
+    const baseUrl = useBaseUrl();
 
     const user = useSelector((state) => state.user);
     const [isImage, setIsImage] = useState(false);

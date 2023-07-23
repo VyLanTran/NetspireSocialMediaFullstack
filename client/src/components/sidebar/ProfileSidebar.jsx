@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { Instagram, Twitter, LocationOn, WorkOutlined, School, Edit } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
 import { FollowingList } from './FollowingList';
+import { useBaseUrl } from '../../context/BaseUrlContext';
 
 export const ProfileSidebar = ({ userId }) => {
-    // const baseUrl = "http://localhost:3001";
-    const baseUrl = "https://netspire-api.vercel.app";
+    const baseUrl = useBaseUrl();
 
     const [user, setUser] = useState(null);
     const token = useSelector((state) => state.token);

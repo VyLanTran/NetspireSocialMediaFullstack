@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-// import dotenv from 'dotenv';
 import authReducer from "./features/authReducer";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
@@ -18,6 +17,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { PersistGate } from "redux-persist/integration/react";
+import { BaseUrlProvider } from './context/BaseUrlContext';
 
 // dotenv.config();
 const persistConfig = { key: "root", storage, version: 1 };
@@ -35,10 +35,12 @@ const store = configureStore({
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistStore(store)}>
-        <App />
-      </PersistGate>
-    </Provider>
+    <BaseUrlProvider>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistStore(store)}>
+          <App />
+        </PersistGate>
+      </Provider>
+    </BaseUrlProvider>
   </React.StrictMode>
 );

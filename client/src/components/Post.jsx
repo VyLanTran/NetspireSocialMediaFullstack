@@ -5,11 +5,11 @@ import IosShareIcon from '@mui/icons-material/IosShare';
 import { useDispatch, useSelector } from "react-redux";
 import { updatePost } from "../features/authReducer";
 import { PostHeader } from './PostHeader';
+import { useBaseUrl } from "../context/BaseUrlContext"
 
 export const Post = ({ postId, userId, name, avatar, picture, description, location, likes, comments }) => {
 
-    // const baseUrl = "http://localhost:3001";
-    const baseUrl = "https://netspire-api.vercel.app";
+    const baseUrl = useBaseUrl();
 
     const dispatch = useDispatch();
 

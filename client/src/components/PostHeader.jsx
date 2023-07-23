@@ -5,11 +5,10 @@ import { MoreVert } from '@mui/icons-material'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { setFollowings } from '../features/authReducer';
-
+import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const PostHeader = ({ userId, name, avatar, location }) => {
-    // const baseUrl = "http://localhost:3001";
-    const baseUrl = "https://netspire-api.vercel.app";
+    const baseUrl = useBaseUrl();
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

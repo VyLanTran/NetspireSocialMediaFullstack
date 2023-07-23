@@ -7,10 +7,10 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { ProfileSidebar } from '../components/sidebar/ProfileSidebar';
 import { NewPost } from '../components/NewPost';
+import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const Profile = () => {
-    // const baseUrl = "http://localhost:3001";
-    const baseUrl = "https://netspire-api.vercel.app";
+    const baseUrl = useBaseUrl();
 
     const [user, setUser] = useState(null);
     const { userId } = useParams();

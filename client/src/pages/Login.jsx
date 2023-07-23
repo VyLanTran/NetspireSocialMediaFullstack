@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Typography, Box, Grid } from '@mui/material';
 import { useDispatch } from "react-redux";
 import { setLogin } from "../features/authReducer";
+import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const Login = () => {
-    // const baseUrl = "http://localhost:3001";
-    const baseUrl = "https://netspire-api.vercel.app";
+    const baseUrl = useBaseUrl();
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
