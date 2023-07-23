@@ -53,21 +53,11 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
 /** MONGOOSE SETUP */
-// const PORT = process.env.PORT || 8080;
-// mongoose.connect(process.env.MONGO_URL, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-// }).then(() => {
-//     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-
-//     /** ADD DATA ONE TIME, SO COMMENT AFTER DATA IS INSERTED */
-//     // UserModel.insertMany(users);
-//     // PostModel.insertMany(posts);
-
-// }).catch((error) => console.log(`${error} did not connect`));
-
 const PORT = process.env.PORT || 8080;
-mongoose.connect(process.env.MONGO_URL).then(() => {
+mongoose.connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}).then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
     /** ADD DATA ONE TIME, SO COMMENT AFTER DATA IS INSERTED */
