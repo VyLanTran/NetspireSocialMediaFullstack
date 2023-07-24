@@ -189,7 +189,7 @@ export const Register = () => {
                                     color: "#008ad3",
                                 }}
                                 onClick={() => {
-                                    navigate('/');
+                                    navigate('/login');
                                     navigate(0);
                                 }}
                             >

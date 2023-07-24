@@ -7,7 +7,6 @@ import { useBaseUrl } from '../context/BaseUrlContext';
 
 export const Login = () => {
     const baseUrl = useBaseUrl();
-    console.log(baseUrl)
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -97,7 +96,7 @@ export const Login = () => {
                                     color: "#008ad3",
                                 }}
                                 onClick={() => {
-                                    navigate('/register');
+                                    navigate('/');
                                     navigate(0);
                                 }}
                             >
