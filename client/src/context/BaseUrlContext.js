@@ -1,6 +1,7 @@
 import React, { createContext, useContext } from 'react';
 
-const baseurl = "http://localhost:3001";
+// const baseurl = "http://localhost:3001";
+const baseurl = "https://netspire-api.vercel.app";
 
 const BaseUrlContext = createContext();
 
