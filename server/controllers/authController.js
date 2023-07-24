@@ -1,4 +1,5 @@
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs"
 import jwt from "jsonwebtoken";
 import UserModel from "../models/UserModel.js";
 
@@ -13,8 +14,10 @@ const register = async (req, res) => {
             return res.status(400).json({ error: "This email was already used to register" });
         }
 
-        const salt = await bcrypt.genSalt();
-        const hashedPassword = await bcrypt.hash(password, salt);
+        // const salt = await bcrypt.genSalt();
+        // const hashedPassword = await bcrypt.hash(password, salt);
+        const salt = await bcryptjs.genSalt();
+        const hashedPassword = await bcryptjs.hash(password, salt);
 
         const newUser = new UserModel({ firstName, lastName, email, password: hashedPassword, avatar });
         await newUser.save();
@@ -37,7 +40,8 @@ const login = async (req, res) => {
         if (!user)
             return res.status(404).json({ error: "User not found" });
 
-        const isValid = await bcrypt.compare(password, user.password);
+        // const isValid = await bcrypt.compare(password, user.password);
+        const isValid = await bcryptjs.compare(password, user.password);
         if (!isValid)
             return res.status(401).json({ error: "Incorrect password" });
 
