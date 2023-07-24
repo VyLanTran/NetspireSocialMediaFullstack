@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
-// import bcrypt from "bcrypt";
-import bcryptjs from "bcryptjs"
+import bcrypt from "bcrypt";
 
-// const salt = await bcrypt.genSalt();
-const salt = await bcryptjs.genSalt();
+const salt = await bcrypt.genSalt();
 
 export const userIds = [
     new mongoose.Types.ObjectId(),
@@ -19,8 +17,7 @@ const users = [
         firstName: "Ethan",
         lastName: "Walker",
         email: "ethanwalker@gmail.com",
-        // password: await bcrypt.hash("ethan", salt),
-        password: await bcryptjs.hash("ethan", salt),
+        password: await bcrypt.hash("ethan", salt),
         avatar: "ethan.jpeg",
         // followings: [userIds[1], userIds[2]],
         // followers: [userIds[1], userIds[3], userIds[4]],
@@ -32,8 +29,7 @@ const users = [
         firstName: "Isabella",
         lastName: "Morgan",
         email: "isabellamorgan@gmail.com",
-        // password: await bcrypt.hash("isabella", salt),
-        password: await bcryptjs.hash("isabella", salt),
+        password: await bcrypt.hash("isabella", salt),
         avatar: "isabella.jpeg",
         // followings: [userIds[0], userIds[4]],
         // followers: [userIds[0]],
@@ -45,8 +41,7 @@ const users = [
         firstName: "Caleb",
         lastName: "Thompson",
         email: "calebthompson@gmail.com",
-        // password: await bcrypt.hash("caleb", salt),
-        password: await bcryptjs.hash("caleb", salt),
+        password: await bcrypt.hash("caleb", salt),
         avatar: "caleb.jpeg",
         // followings: [userIds[4]],
         // followers: [userIds[0]],
@@ -58,8 +53,7 @@ const users = [
         firstName: "Ava",
         lastName: "Roberts",
         email: "avaroberts@gmail.com",
-        // password: await bcrypt.hash("ava", salt),
-        password: await bcryptjs.hash("ava", salt),
+        password: await bcrypt.hash("ava", salt),
         avatar: "ava.jpeg",
         // followings: [userIds[0]],
         // followers: [userIds[4]],
@@ -71,8 +65,7 @@ const users = [
         firstName: "Noah",
         lastName: "Foster",
         email: "noahfoster@gmail.com",
-        // password: await bcrypt.hash("noah", salt),
-        password: await bcryptjs.hash("noah", salt),
+        password: await bcrypt.hash("noah", salt),
         avatar: "noah.jpeg",
         // followings: [userIds[0], userIds[3]],
         // followers: [userIds[1], userIds[2]],
